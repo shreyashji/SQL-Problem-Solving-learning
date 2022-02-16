@@ -1,0 +1,158 @@
+ddl-drop,rename,create,alter,truncate
+dml-delete ,insert, update
+dcl-grant,revoke
+dql-select
+tcl-commit,rollback,save point
+
+Q. DIFFERENCE between delete ,truncate,drop
+Q. difference between where  and having
+Q. difference between group by and order by
+
+LEVEL 2
+Q. difference between CHAR AND varchar
+Q. difference between union and join
+Q. difference between in & exist
+Q. how to create empty table with the same structure as another table
+select * INTO students_copy from students where 1=2(false conditon 1=2)
+Q what is pattern matching in sql
+select * form students where name LIKE '_k%'; --SECOND LETTER IS K,% MEANS ANTYHING AFTER THAT
+Q. WHAT IS UNION MINUS INTERSECT
+union -combines, intersect- means common between both tables will be printed,minus all records from student table which are not in contacts table will be printed
+--select name from students UNION select name from contacts  
+
+Q difference between union and union all
+ union print only once, union all can print duplicates
+ 
+Q what is a view 
+virtual table :   from customers where country='India';
+
+Q character manipulation function
+UPPER,LOWER,INITCAP,LENGTH,CONCAT
+
+level 3
+NORMAL FOEMS
+
+1. DIFFERENCE BETWEEN WHERE v/s HAVING
+1.WHERE 
+-filter rows
+-works on rows data ,not on aggregated data
+select * from employee here score>40;
+2.HAVING
+-works on aggregated data
+AGGREGATE FUNCTIONS
+- TO perform calculation on multiple  rows of a single column
+-it returns a single value
+-it is used to summarize data 
+-count,max,min,avg,summarize
+-having and group by used in agggregate function
+select max(salary) from employee having emp_id>=15
+
+2. DIFFERENCE BETWEEN UNION v/s UNION ALL
+UNION - REMOVES duplicate records
+UNION ALLL-  does not remove duplicate
+--union operator combines rsult set of 2 or more select statement
+--each select stmt must have
+1.same number coln
+2.coln must have similar data type
+3.coln must be in same order
+
+3. DIFFERENCE BETWEEN IN v/s EXIST
+1.IN -> multiple or 
+select * from customers where city='mumbai' or city='banglore' or city='chennai'
+can be converted into like this querry
+select * from customers where city IN (MUMBAI,BANGLORE,CHENNAI);
+2.EXIST-> returns true or false
+select * from customers where EXISTS (select city from where table2.id=customer.id)
+USECASE
+--IN->  bIG OUTER QUERRY AND SMALL INNER QUERRY
+--EXISTS-> SMALL OUTER QUERRY and big inner querry
+--IN-> Compare one value to several value
+--EXISTS->tells you wheather a querry returned any result
+
+4. DIFFERENCE BETWEEN ORDER BY  v/s GROUP BY
+ORDER BY-> SORTING,ASC OR DSC
+GROUP BY-> USED WITH AGGREGATE FUNCTIONS
+*'GROUP' BY FOLLOWS 'where' clause in 'select' statement
+*'WHERE' Cannot be used after group by 
+*'HAVING' IS USED AFTER group by 
+
+4. DIFFERENCE BETWEEN JOIN  v/s SUBQUERY
+-both are used to combine data from different tables into a single result
+---SUBQUERRY
+SELECT phone, cust_name from customers where cust_id IN
+(select cust_id from orders);
+-can select only from first table
+-slower
+---JOIN 
+SELECT phone, cust_name,ORDER_ID from customers c JOIN orders o on c.cust_id=o.cust_id;
+-can select form either of the table
+-faster
+
+4. DIFFERENCE BETWEEN JOIN  v/s UNION
+---union
+-cobines rows
+-not neccessary to have same column name
+-but no. of column & datatype of column should be same
+---JOIN
+-MERGES column
+-combines rows from 2 or more tables based on a related common column between them
+
+Q. how to delete duplicate rows from a table in SQL.
+4 following ways are shown:
+1) remove duplicate rows using a temporary table
+2) remove duplicate rows using auto ID
+3) remove duplicate rows using row_number()
+4) remove duplicate rows using CTE
+
+1.USING TEMP TABLE
+-SELECT distinct * INTO NEW_TABLE FROM OLD_TABLE
+-DELETE * FORM OLD_TABLE or TRUNCATE
+-INSERT INTO OLD_TABLE SELECT * FROM NEW_TABLE
+-DROP TABLE NEW_TABLE
+
+2. USING AUTO_ID
+-ALTER TABLE EMPLOYEE ADD auto_id int IDENTITY(1,1)
+-delete 8 from employee where auto_id NOT IN (SELECT min(auto_id)
+from employee group by emp_id ,emp_name)
+
+3.using row number
+delete from (select 8, row_number() OVER(PARTITION BY ID Order by id) as rn from mytable)
+ where rn>1
+ 
+4.USING CTE (COMMON TABLE EXPRESSION)
+-used as a temporary result set
+-lasts only for duration for the querry
+
+WITH cte as (select row_number() over(partition by id order by id) as rn from mytable)
+delete from cte rn>1
+
+5. DIFFERENCE BETWEEN DELETE  v/s TRUNCATE
+---DELETE 
+-DML ,DELETE REMOVEs some  or all rows 
+-it does not free space containing the table
+-the transaction log will still have the deleted rows
+-slower than truncate
+---TRUNCATE
+-DDL,removes all the rows from the table 
+-it frees up space containing the table
+-no where clause can be used
+---DROP
+-removes table from the database
+-cannot be rolled up
+
+Q8.difference BETWEEN CHAR V/S VARCHAR
+VARCHAR->variable length
+char->fixed length
+---char
+-uses stTIC MEMORY ALLOCATION
+-FIXED length
+-faster
+---VARCHAR
+-it uses dynamic memory location
+-variable length
+-better for storage
+-slower
+-has an overhead of 2 bytes
+---char->telephone no,zip code, etc
+---varchar->names
+

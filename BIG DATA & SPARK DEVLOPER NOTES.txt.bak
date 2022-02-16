@@ -1,0 +1,117 @@
+#COMPONENTS OF HADOOP ECOSYSTEM
+
+DATA INGESTION = SQOOP , FLUEME
+DATA STORAGE= S3, HDFS
+DATA PROCESSING= HADOOP MAPREDUCE(YARN),APACHE SPARK(CLUSTER MGMT)
+DATA ANALYSIS= HIVE,PIG,IMPALA
+DATA EXPLORATION= CLOUDERA SEARCH,HUE,OZZIE
+DATA VISUALIZATION= TABLEAU
+
+HDFS=PROVIDE storage layer for hadoop,suitable for distributed storage and processing,streaming access to 
+file system data,provide file permission and authentication,provides a cli to interact with  HDFS.
+
+HBASE= STORE DATA IN HDFS,HBASE IS  A NOSQL OR NON RELATIONAL DATABASE,MAINLY USED WHEN YOU NEED RANDOM
+real time,read/write access to your big data ,provide support to high volume of data and high throughput
+
+SQOOP : A TOOL TO DESIGNED TO TRANSFER DATA BETWEEN HADOOP AND RELATIONAL DATABASE SERVER
+IT IS  used to import data from RELATIONAL DATABASEs such as oracle and mysql to hdfs and export data from hdfs to relational databases
+
+FLUEME=if you want to ingest event data such as streaming data ,ensor data  or log files you can use FLUME.
+IDEALLY SUITED for event data from multiple system,a distributed service for ingesting streaming data
+
+SPARK= open source cluster computing framework,provide 100 times faster performance than mapreduce,
+support machine learning and batch processing
+
+SPARK HAS FOLLOWING MAIN COMPONENTS
+
+SPARK CORE AND RESILLIENT DISTRIBUTED DATASETS(RDDs),SPARK SQL,SPARK STREAMING ,MLIib,GRAPHX
+
+HADOOP=THE ORIGINAL hadoop processing engine which is primarily java based,based on the map and reduce programming model
+,an extensive and fault tolerance framework,commonly used
+
+PIG=AN open source dataflow system,used mainly for analysis, converts pig scripts to map reduce code
+,ana alternative to writing map reduce code,best for ad hoc queries such as join and filter
+
+IMPALA=HIGH PERFORMANCE sql engine WHICH RUNS ON HADOP CLUSTER, IDEAL FOR INTERACTIVE ANALYSIS,
+,very low latency-measured in miliseconds,support a dialect of sql(impala sql)
+
+HIVE= SIMILAR TO IMPALA,BEST FOR DATA PROCESSING AND ETL,execute querries using mapreduce,
+
+CLOUDERA SEARCH= one of cloudera near real time access product,enable non tech users to search and explore data stored in or ingested into hadoop and hbase
+,a fully integrated data processing platform,eliminate the need to move large datasets across infrastructures to address business tasks
+
+OOZIE= is a workflow and coordination system used to manage the hadoop jobs
+
+HUE(Hadoop user experience)=open source web interface for analyzing data with hadoop,it provides SQL editor for hive,impala,mysql,oracle,postgreSQL,spark SQL,AND SOLARSQL
+text interface for exploring data.
+
+commercial HADOOP DISTRIBUTION= cloudera,hortonworks,mapr,AMAZON EMR,AZURE HDInsight
+
+#BIG DATA PROCESSING
+1.ingest      = flume,oozie,apache kafka
+2.processing  = hadoop,hbase,hadoop mapreduce,spark
+3.analyze     = hive,impala,pig
+4.access      = hue,cloudera
+
+#HDFS & YARN
+hdfs IS A DISTRIBUTED FILE SYSTEM THAT PROVIDES ACCESS TO DATA ACROSS HADOOP CLUSTER
+,CLUSTER IS A GROUP OF COMPUTERS,HDFS MANAGES AND SUPPORTS ANALYSIS OF very large volume of big data
+
+traditional system challenges = cost ,speed ,reliability,
+
+HDFS RESOLVES ALL 3 MAJOR ISSUES
+HDFS COPIES DATA MULTIPLE TIMES,HADOOP CLUSTER READ OR WRITE MORE THAN ONE TB DATA IN A SECOND,ZERO LICENSING AND SUPPORT COST
+
+FOR EXample a person donates book to library,librarian decides to arrange the books on a smaal rack,also he distributes multiple copies of each book on other racks
+for easy access.
+
+HDFS HAS 128MB -LARGE BLOCK OF DATA ,WHILE TRADITIONAL FILE SYSTEM HAS 5 SMALL BYTES OF DATA,
+ACCESS TO LARGE DATA IN HDFS READS HUGE DATA SEQUENTIALLY IN A SINGLE OPERATION,WHILE IN traditional file system suffers form disk i/o problem
+coz of multiple seek operation
+
+characteristics of HDFS=built for large datasets,support for hetrogenious clusters,rack-aware,scalable,fault tolerant
+
+HDFS ARCHITECTURE-MASTER-SLAVE 
+TWO OR MORE SEPRATE MACHINE ARE CONFIGURED AS NAMENODE,ONLY 1 IS ACTIVE AT A  time,all other name nodes are at standby state
+,the active namenode is responsible for client opeartion in the cluster,stanby  namenodes simlply acts as a slave maintaining the state to provide 
+fast failover if necessary, a datanodes serves read or write request,it also create ,deletes and replicates blocks
+based on the instruction from the name node,stand by namenode and active namenode keep in sync with each other
+through share edit logs or metadata,the active node update the edit logs about storage, this is done with namespace modification
+like block modification,standby nodes reads the changes made by dit logs and apply it to its on namespace in a consistent manner,
+in the event of failover ,the standby will ensure that it has read all the edit before promoting itself to active state, this is manual failover perform by admin
+for automatic failover we nee to utilize service of apache zookeeper which maintains small amount of coordination data,zookeper maintains an open session with active namenode by periodically pinging it
+with health check command,if the node has crashed or frozen or otherwise entered in unhealthy state, the health monitor mark it as unhealthy
+and elect a new namenode
+
+NAMENODE SERVER- CORE COMPONENT OF AN HDFS CLUSTER,
+datanode,is a multiple instance server ,the datanode server is responsible for storing and maintaing data blocks
+
+zooekeeper allows distributed process to coordinate with  each othe through a shared hirarchical namespace
+zookeeper implementation is simple and replicated which puts a premium on high performance,high availability, and strictly ordered access
+
+namespace =allow user data to be stored in files,follows a hirarchical file systems with directories and files,support operation such as create ,remove,rename,move
+
+namenode=it maintains two persistent files, atransaction log called an edit log, a namespace image called  an fsimage
+ 
+SQOOP =SMOOTH IMPORT /EXPORT OF DATA FROM STRUCTURED DATABASEs,CAN BE USED IN ONLINE MARKETING
+SQOOP PROCESSING=runs in hadoop cluster,it imports data from rdb or nosql db to hadoop,it has access to hadoop core,which helps in using mappers to slice the incoming data into 
+unstructured formats and place the data in hdfs, it exports data back into rdb,ensuring that the schema of data in the database is maintained
+
+sqoop execution process= the dataset being transferred is divided into partitions,the map only job is launched with individual mappers responsible for transferring a slice of the dataset.
+,each record of data is handled in a type -safe manner
+
+SQOOP IMPORT PROCESS= gathering metadata,job submitted to cliuster,data is transferred
+
+APACHE FLUME : IT IS A DISTRIBUTED AND RELIABLE SERVICE FOR EFFICIENTLY COLLECTING,AGGREGATING AND MOVING LARGE AMOUNTS OF STREAMING DATA INTO THE HADOOP SYSTEM,
+IT HAS A SIMPLE AND FLEXIBLE architecture which is robust and fault-tolerant,based on streaming data flows
+
+flume model : agent,processor,collector
+
+APACHE KAFKA= IT IS A HIGH PERFORMANCE ,REAL TIME MESSAGING system. it is an open source tool and is part of apache projects
+the characteristics of kafka are; IT IS A DISTRIBUTED AND PARTITIONED MESSEGING SYSTEM,IT IS HIGHLY FAULT-TOLERANT,IT IS HIGHLY SCLAABLE,IT CAN PROCESS AND SEND MILLIONSOF MESSAGES PER SECOND TO SEVERAL RECEIVERS
+
+kafka can be used in various use cases,messeging service,real time processing,log aggregation,commit log service,event sourcing,website activity tracking
+
+kafka data model consist of messages and topics
+messages: represents information such as lines in a log file,a row of stock market data ,or an error message.
+messages are grouped into categories called topics,eg. log message and stock message
