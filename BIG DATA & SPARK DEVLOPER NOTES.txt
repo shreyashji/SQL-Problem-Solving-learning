@@ -117,3 +117,37 @@ messages: represents information such as lines in a log file,a row of stock mark
 messages are grouped into categories called topics,eg. log message and stock message
 
 PIG = 
+
+HIVE = IT PROVIDES SQL LIKE INTERFACE FOR USERS TO EXTRACT DATA FROM THE HADOOP SYSTEM
+FEATURES OF HIVE =  USES hiveQL,high level abstraction layer on top of mapreduce and apache spark,suitable for structured data (analysis of historical data)
+Hive architecture = the major component of hive architecture are hadoop core comp. ,metastore,driver, and hive clients.
+Job exection flow in HIVE : RECIVE SQL QUERRY 1.parse hive QL,
+2.MAKE optimization
+3.plan execution.
+4.submit job to cluster
+5.monitor progress
+6.process data in mapreduce or apache spark7.store data in hdfs
+
+FILE FORMAT = TEXT FILE(human readable),avro ,parquet ,sequence(not readaable)
+
+avro= efficient storage (optimized binary encoding) ,widely supported inside and outside hadoop ecosystem,
+ideal for long term storage of data,can read from and write in many languages,embeds meta data in the file,
+considered the best choice for general purpose storage in hadoop
+
+parquet=  is columnar format developed by cloudera and twittter,uses advance optimization described in google dremel paper,
+considered most efficient for adding multiple records at a time
+
+HIVE OPTIMIZATION = PARTITIONING,BUCKETING & SAMPLING
+non partitioned table : hive will need to read all the files in a table data directory,the process can be very slow and expensive,especialyy when the tables are large
+
+partitions are horizontal slices of data that allow larger sets of data to be seprated in more manageable chunks
+,means use partitioning to store data in separate files by (state table col in video),
+a partition column is a virtual column were data is not actually stored in the file,if 50 states then 50 partition
+
+DATA INSERTION 
+= DATA INSERTION INTO PARTITIONED TABLES CAN BE DONE IN two ways or modes static and dynamic partitioning
+with large amount od data stored in a table dynamic partitioning si suitable
+
+When not to use partitioning: when column have too many unique rows,
+when creating a dynamic partition as it can lead to high number of partition,when the partition is less than 20k in size
+
