@@ -146,8 +146,31 @@ a partition column is a virtual column were data is not actually stored in the f
 
 DATA INSERTION 
 = DATA INSERTION INTO PARTITIONED TABLES CAN BE DONE IN two ways or modes static and dynamic partitioning
-with large amount od data stored in a table dynamic partitioning si suitable
-
+with large amount od data stored in a table dynamic partitioning si suitable.
 When not to use partitioning: when column have too many unique rows,
 when creating a dynamic partition as it can lead to high number of partition,when the partition is less than 20k in size
 
+OVER PARTITIONING CAN BECOME A PROBLEM : hERE COMES THE BUCKETING, bucketing is an optimization technique
+buckets distribute the data load into user defined set of cluster by calculating the hash code of the key mentioned in the querry
+
+NOSQL db
+= IS A FORM OF UNSTRUCTURED STORAGE,WITH EXPLOSION OF SOCIAL MEDIA SITES,SUCH AS FB,TWITTER THE DEMAND TO MANAGE LARGE DATA HAS GROWMN TREMEDNDIOUSLY
+NO SQL IS key value pair db,documnet db,column based,graph
+KEY VALUE : ORACLE nOSQL,redis server,scalaris
+document based db : mongo db,couch db,raven db
+column based db : big table, cassandra,hbase,hypertable
+graph based db : neo4j,infogrid,infinite graph,flock db 
+
+HBASE : HBASE RESTS ON TOP OF HDFS AND ENALES REAL TIME ANALYSIS OF DATA,IT CAN  STORE HUGE AMOUNT OF DATA FOR EXTREAMLY FAST READS AND WRITES
+hbase is mostly ised in scenario that requires regular and consistent inserting and overwriting of data
+HDFS stores processes and manages large amount of data efficinetly .however ,it performs only batch processing and the data will be accessed in a sequential manner,
+therefore a soltion is required to access read or write data anytime regardless of its sequence in the clusters of data
+
+Hbase is  a type of nosql database and is classified as a key value store.
+in hbase value is identifies with a key, key and value are bytearray,value are stored in key orders,can be quicly accessed by value keys
+
+DATA STORAGE IN HDFS :data is stored in files called hfiles or storefiles that are usually saved in hdfs,
+hfile a a key value map,when data is added ,it is written to a log called write ahead loag and sstored in the memory,memstore.
+HFILES are immutable,since HDFSdoes not support updates to an existing file
+
+when to use HBASE  : when you have miilions or biilions of rows,sufficient commodity h/w with at least 5 nodes,for random select and range scan by key
