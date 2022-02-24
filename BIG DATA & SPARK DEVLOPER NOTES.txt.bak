@@ -172,3 +172,38 @@ in hbase value is identifies with a key, key and value are bytearray,value are s
 DATA STORAGE IN HDFS :data is stored in files called hfiles or storefiles that are usually saved in hdfs,
 hfile a a key value map,when data is added ,it is written to a log called write ahead loag and sstored in the memory,memstore.
 HFILES are immutable,since HDFSdoes not support updates to an existing file
+
+when to use HBASE  : when you have miilions or biilions of rows,sufficient commodity h/w with at least 5 nodes,for random select and range scan by key
+
+apace spark: next gen big data framework
+SPARK RDD : spark resilient distributed dataset(rdd) is an immutable collection of objects that defines the data structure of spark
+spark rdd is a fault tolerant collection of elements that can be opearted paralley
+
+--LAZY EVALUATION : ALL transformation in apache spark are lazy they did not compute there result right away,they just remember the transformation applied to base dataset 
+--Corse -grained operation : it applies to all elements in dataset to map ,filter,group by opearion
+--in memory computation : it store intermediate result in distributed memory,ram instead of stable storage such as disk
+--fault tolerant : as they track data lineage information,inorder to build lost data automaticlay on failure,they will rebuild lost data on failure using this lineage data,each rdd remember how it is created
+from other datasets in order to recreate itself anytime 
+--partitioning : fundamental unit of parallelism in spark rdd,each partiotion is 1 logical division of data which is mutable or changeable
+one can create a partition through transformation on existing partition.
+--persistence : users can state which rdd they will reuse and  choose a storage strategy fro each of them
+--immutable : data is saved to share  across all process, they can also be created anytime which makes caching,sharing,replication easy
+--location stickyness :  rdd are capable of defining placement prefrence to compute partitions. the placement prefrence refers to information about the location of each rdd
+
+RDD SUPPORTS TWO TYPES OF OPEARION : Transformation & action
+tranformation allow us to crwate new dataset using existng one,map is a transformation  that passes each dataset eelement through a function and returns a new rdd representing the results
+there are two types of transformation narrow & wide transformation.
+narrow : is self sufficient .it is the result of map and filter  such that  the data is from a single partition only.
+function used in narrow : map,flatmap,mappartition,filter,sample,union
+
+wide : is not self sufficient. its the result of group by key and reducebykey() like function ,such that  the data  vcan be  from multiple partitions.also known as shuffle transformation.
+function used for this type of transformation: cartesianjoin,intersection,repartition,reducebykey,groupbykey,coalace,distinct
+
+ACTIONS : ALLOW US TO RETURN TO THE DRIVER PGRM,AFTER RUNNING A COMPUTATION ON THE dataset. actions are the rdd operation that produce non rdd-values
+reduce is an action that aggregates all the element of te rdd using some function
+some actions : first ,take,reduce,collect,count
+
+caching & persistance are the techniques used to store the result of rdd evaluation. they are also used by devlopers to enhance performance of applications
+cost & time & less execution time
+methods of caching and persistance : cache() & persist().these methods can be used to store all the rdd in memory and used them efficiently across opeartions
+the diff btw cache & persist is that while using cache(),the default storage level is memory_only,whereas while using persist(),various storage levels can be used
