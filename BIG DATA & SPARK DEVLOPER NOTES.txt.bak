@@ -207,3 +207,65 @@ caching & persistance are the techniques used to store the result of rdd evaluat
 cost & time & less execution time
 methods of caching and persistance : cache() & persist().these methods can be used to store all the rdd in memory and used them efficiently across opeartions
 the diff btw cache & persist is that while using cache(),the default storage level is memory_only,whereas while using persist(),various storage levels can be used
+
+RDD Lineage : rdd lineage is A GRAPH THAT CONTAINS THE EXISTING RDD AND THE NEW RDD CREATED FROM THE EXISTING ONE AS a result of transformation.
+when a new rdd has been created from an existing rdd,the new rdd contains a pointer to the parent rdd.similarly,all the dependencies between the rdd will be logged in a grap,rather 
+than the actual data.
+
+DAG : is a graph where rdd and the opeartions to be performed oon rdd are represented in the form of vertices and edges ,respectivley
+
+partitioning in spark : tuples in the same partition are guranteed to be on the same machine.
+eaach machine contains one or more partitions,& the total no. of partitions is configureable
+there are types of partition in spark 
+hash : if we did not mention any partitioner,then spark will use this hash partitioner for partitioning the data
+range :if there are sortable records,then range partition will divide the records alomost in equal ranges
+custom partitioning :  we can customize the number of partitions we need and what should be stored in those partitions.
+partitions can be done based on size,partition can be doe by specifying the minimum no. of  partitions as textfile(file,minpartitions)
+,while running on a cluster the minimum no. of partitions by default is 2, more partitions=more parallelization
+
+RDD OPERATION work on each of the following partitions:
+foreachpartition : call a function foreach
+mappartition : will create a new rdd by executing a function on each partition on the current rdd
+mappartitionwithindex : same as above ,but does include index of partition function
+
+SHUFFLING : ITS AN OPERATION which require one node that will fetch data from other nodes to have data for computing the result.
+,fetching data via network results in data partitioning sorting,serialization,disk and network i/o which are expensive to the applications
+
+hash shuffle: each task will write the output into multiple files (this is ast,no i/o overhead, no memory overhead)
+sort shuffle : each task spills only one shuffle containig segments and one index file
+
+Unsafe shuffle : the reccords  are serialized once and then stored in memory pages.
+it has single serialization,no deserialization/serialization for merging spill files,and sorting is cpu cache friendly
+
+Aggregation : to perform aggregation ,the datasets must be described in the form of key/value pairs,key/value pairs are a common data type required for many operation in spark
+functions that can be used for aggregation : reducebykey(),foldbykey(),mapvalues()
+
+SPARK SQL -PROCESSING FRAMEWORK
+ADVANTAGE OF SPARK SQL
+integrated:mixes sql queries with spark programs
+unified data access: loads and queries data from differet sources
+standard connectivity:connects through jdbc or odbc
+performance :executes the most optimal plans
+
+SQL CONTEXT :THE SQL context class or any of its descendants acts as the entry point into all functionalities
+q.how to get the benefit of a superset of the basic sql context functionality?
+build a hive context to:
+use the writing ability for queries
+access hive udf and read data from hive tables
+--we can use the spark.sql.dialect option to select the specific variant of sql used for parsing queries.
+--on a sql context ,the sql function allows application to programmatically run sql queries and then return a dataframe as the result
+eg. val df=sqlcontext.sql("SELECT * FROM table")
+
+DATAFRAMES : represents a distributed collection of data is organised into columns that are named
+--construct a dataframe:use sources such as tables in hive ,structured data files,existing RDD,and external databases
+--convert them into RDDs : call the rdd method that returns the dataframe  contents as an RDD of rows
+in prior version of spark sql api,scehemaRDD has been renamed as dataaframe
+
+USE CASE : RDD API 
+we can use any three api based on requirements
+RDD : LOW LEVEL TRANSFORMATION & UNSTRUCTURED DATA
+USE CASE : DATAFRAME & DATASET API
+IN SPAark dataframe api and datasets api were merged.unifying data processing capabilities across libraries
+dataframe & dataset : high evel abstraction,unifies access,high level expression(filter ,map,aggregation,avrg,sum,sql queries,use of lambda funnction on semi structured data),
+high degree of typesafety at compile time
+ 
