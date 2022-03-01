@@ -1,0 +1,7 @@
+df=spark.read.csv('/filestore/tables/order.csv',header=True,inferSchema=True)
+###inferschema=datatype of the column
+df.show()
+df.printSchema()
+##remain same in pyspark also
+display(df) #####not exist in spark (only in databricks)
+

@@ -269,3 +269,43 @@ IN SPAark dataframe api and datasets api were merged.unifying data processing ca
 dataframe & dataset : high evel abstraction,unifies access,high level expression(filter ,map,aggregation,avrg,sum,sql queries,use of lambda funnction on semi structured data),
 high degree of typesafety at compile time
  
+ DATAFRAME USED MOSTLY ,NO USE OF RDD NOW
+ 
+Nosql:nosql db are commonly used to solve challenges posed by stream processing techniques.
+,minimal latency,high storage,scalability
+
+REAL TIME PROCESSING of big data : processing of continuous input,processing and analysis of reporting data
+-the process consists of a sequence of repeated operations.in which the data streams are transferred  to the memory
+-real time processing is crucial in order to continue the high level functionality of automated system having intensive data streams and different  data structures
+-ex bank atm,radar system,disaster mgmt,iot,social n/w
+
+Data ingestion : flume,kafka
+data storagestream processing: spark streaming,storm,s4
+analytical data store : Hbase,HIVE,cassandra
+Analysis & reporting :splunk,sap hana
+
+data processing architecture for real time processing should have the following properties
+fault tolerant & scalabel ,supportive of batch and incremental updates,extensible
+
+The Lambda architecture :it composed of threee layers batch,real time,serving
+batch layer
+-store the raw data as it arrives
+-compute the batch views for consumption
+-manages historical data 
+-recompute results such as machine learning models
+-operates on full data
+-produces most accurate results
+-has high cost of high latency due to high computation time
+
+Real time layer
+-receives the arriving data
+-performs incremental updates to the batch layer results
+-has incremental algorithims implemented at the speed layer
+-has a significantly reduced computtional cost
+ 
+The Kappa architecture : only processes data as stream
+-handle both real time data processing and continuous data reprocessing using a single stream processing engine
+-require incoming data stream to be replayed very quickly
+-in case of code changes ,a second stream process replays all previous data and replaces the data in the serving layer
+-simplyfy by only keeping one code base
+
