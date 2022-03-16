@@ -38,7 +38,7 @@ select * from transactionss;
 #total 2 rows
 
 #with self join,join on customer _id,difference of order date should be one month->count as retain customer
-select * from transactionss
+select * from transactionss;
 select * from transactionss;
 
 select month(this_month.order_date,last_month) as Monthh,count(distinct last_month.cust_id) as retained_customers from 
@@ -50,4 +50,18 @@ group by month(this_month.order_date,last_month) #this is for mothwise data
 #if do inner join -jan data will not come cozno repet customer was there
 #we want to see each month data,even if there is no customer
 
-#try with analytical function
+#try with analytical function homework
+#for latest month cant see churn,also retention
+
+
+#customer churn
+select month(this_month.order_date,last_month) as Monthh,count(distinct last_month.cust_id) as retained_customers from 
+transactionss last_month 
+left join transactionss this_month 
+on this_month.cust_id = last_month.cust_id
+and datediff(month,last_month.order_date,this_month.order_date)=1
+WHERE this_month.cust_id is null
+group by month(last_month.order_date)
+
+#FRO THE MONTH F FIRST THERE IS 1 CUSTOMER WHICH WE LOST,ADD 1 FOR FEBRURARY ,depends on matrix on us
+#THERE IS NO DATA FOR MARCH SO ALL 4 
