@@ -1,0 +1,42 @@
+CREATE TABLE MIN_MAX_SEQ (
+groupss varchar(20),
+Sequence  int
+);
+/*
+INSERT INTO MIN_MAX_SEQ VALUES('A',1);
+INSERT INTO MIN_MAX_SEQ VALUES('A',2);
+INSERT INTO MIN_MAX_SEQ VALUES('A',3);
+INSERT INTO MIN_MAX_SEQ VALUES('A',5);
+INSERT INTO MIN_MAX_SEQ VALUES('A',6);
+INSERT INTO MIN_MAX_SEQ VALUES('A',8);
+INSERT INTO MIN_MAX_SEQ VALUES('A',9);
+INSERT INTO MIN_MAX_SEQ VALUES('B',11);
+INSERT INTO MIN_MAX_SEQ VALUES('C',1);
+INSERT INTO MIN_MAX_SEQ VALUES('C',2);
+INSERT INTO MIN_MAX_SEQ VALUES('C',3);
+*/
+#SQL Querrry to find min & max values of common continuous sequence in each group
+#can be achieved by doing minus between rank and seq field
+select GROUPSS, SEQUENCE ,
+ROW_NUMBER() OVER(PARTITION BY GROUPSS ORDER BY SEQUENCE) as rnk
+from MIN_MAX_SEQ;
+
+#step -2 group in such a way seq 123 come in 1 group
+select GROUPSS, SEQUENCE ,
+ROW_NUMBER() OVER(PARTITION BY GROUPSS ORDER BY SEQUENCE) as rnk
+,SEQUENCE - ROW_NUMBER() OVER(PARTITION BY GROUPSS ORDER BY SEQUENCE) as GrpSplit
+from MIN_MAX_SEQ;
+
+#step -3 group by on group and grpsplit filed
+SELECT GROUPSS,
+min(sequence) as Min_seq,
+max(sequence) as Max_seq
+FROM
+(
+select GROUPSS, SEQUENCE ,
+ROW_NUMBER() OVER(PARTITION BY GROUPSS ORDER BY SEQUENCE) as rnk
+,SEQUENCE - ROW_NUMBER() OVER(PARTITION BY GROUPSS ORDER BY SEQUENCE) as GrpSplit
+from MIN_MAX_SEQ
+) A
+GROUP BY GROUPSS ,GrpSplit
+order by groupSS
