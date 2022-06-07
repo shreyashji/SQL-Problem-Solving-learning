@@ -1,0 +1,23 @@
+CREATE TABLE Order_Tbl1(
+ORDER_ID varchar(10),
+PRODUCT_ID varchar(10),
+QUANTITY int
+);
+
+INSERT INTO Order_Tbl1(ORDER_ID,PRODUCT_ID,QUANTITY)
+VALUES('odr1','prd1',5),('odr2','prd2',1),('odr3','prd3',3);
+
+SELECT * FROM IT.Order_Tbl1;
+#explode the  above result data into single unit level  records
+USE IT;
+with recursive  CTE_ORDERS AS (
+#ANCHOR QUERY
+select ORDER_ID, PRODUCT_ID ,1 as QUANTITY,1 as Cnt FROM IT.Order_Tbl1
+UNION ALL
+#recursive part
+SELECT A.ORDER_ID,A.PRODUCT_ID,B.QUANTITY,B.cnt+1
+FROM IT.Order_Tbl1 AS A INNER JOIN CTE_ORDERS AS B
+ON A.PRODUCT_ID = B.PRODUCT_ID WHERE B.cnt+1 <= A.QUANTITY
+)
+select ORDER_ID,PRODUCT_ID,QUANTITY FROM CTE_ORDERS 
+ORDER BY PRODUCT_ID,ORDER_ID
