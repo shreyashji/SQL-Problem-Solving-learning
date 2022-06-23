@@ -37,3 +37,17 @@ CTE_Temp as (
     WHERE id1+1=id2 AND id2+1=id3
 )
 SELECT distinct id,Visit_Date,No_Of_People from CTE_Temp;
+
+WITH recursive CTE_GRP_NUMBERS AS (
+	SELECT *
+	,row_number() OVER(ORDER BY Visit_Date) AS rn
+	,ID-row_number() OVER(ORDER BY Visit_Date) AS grp #subtraction of consecutive no by a consucutive the diff will be same
+	FROM Stadium
+	WHERE No_Of_People >= 100
+)
+SELECT id,Visit_Date,No_Of_People FROM CTE_GRP_NUMBERS WHERE grp in 
+(
+SELECT grp FROM CTE_GRP_NUMBERS
+GROUP BY grp
+HAVING Count(1)>=3
+)
