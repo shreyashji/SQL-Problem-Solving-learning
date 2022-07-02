@@ -16,6 +16,15 @@ LEFT JOIN reverse_pairs T2
 ON T1.B = T2.A AND T1.A = T2.B
 WHERE T2.A IS NULL OR T1.A IS NULL OR T1.A < T2.A ;
 
+SELECT T1.A,T1.B FROM reverse_pairs T1
+LEFT JOIN reverse_pairs T2
+ON T1.B = T2.A AND T1.A = T2.B
+WHERE T1.A < T2.A OR (T2.A IS NULL OR T2.B IS NULL) ;
+
+#CO-related subquery & not exist
+SELECT * FROM reverse_pairs T1 WHERE NOT EXISTS ( SELECT * FROM reverse_pairs AS T2 WHERE 
+T1.B = T2.A AND T1.A = T2.B AND T1.A > T2.A )
+
 #2 - USING Exists or not exists 
 SELECT T1.A,T1.B FROM reverse_pairs T1 WHERE
 NOT EXISTS ( SELECT * FROM reverse_pairs T2 WHERE T1.B = T2.A AND T1.A=T2.B AND T1.A > T2.A);
