@@ -11,7 +11,7 @@ select emp_id, emp_name ,department_id, salary
 ,RANK() OVER(order by salary desc) as rnk
 ,DENSE_RANK() OVER(order by salary desc) as dens_rnk
 from emp;
-
+use world;
 ## give different trank to same nos
 select emp_id, emp_name ,department_id, salary
 ,RANK() OVER(order by salary desc) as rnk
