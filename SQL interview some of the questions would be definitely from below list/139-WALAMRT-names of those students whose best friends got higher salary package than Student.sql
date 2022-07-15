@@ -40,6 +40,8 @@ SELECT * FROM Students_Tbl;
 SELECT * FROM Friends_Tbl;
 SELECT * FROM Package_Tbl;
 
+use it;
+
 WITH recursive CTE_STUDENT AS (
 	SELECT A.ID,A.STUDENT_NAME,F.FRIEND_ID,P.SALARY FROM Students_Tbl AS A INNER JOIN Friends_Tbl AS F ON A.ID = F.ID
 	INNER JOIN Package_Tbl AS P ON A.ID = P.ID
@@ -52,3 +54,9 @@ CTE_FRIEND AS (
 )
 SELECT STUDENT_NAME FROM CTE_FRIEND
 WHERE BEST_FRIEND_SALARY > STUDENT_SALARY;
+
+SELECT *, S.Student_Name FROM (Students_Tbl S JOIN Friends_Tbl f using (id)
+join  Package_Tbl p1 on s.id=p1.id 
+join Package_Tbl p2 on f.Friend_Id = p2.id )
+where p2.salary > p1.salary
+order by p2.salary;
