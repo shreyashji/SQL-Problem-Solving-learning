@@ -11,6 +11,10 @@ insert into team_size values (4,7);
 insert into team_size values (5,9);
 insert into team_size values (6,9);
 
+#Employees with Id 1,2,3 are part of a team with team_id = 8.
+#Employees with Id 4 is part of a team with team_id = 7.
+#Employees with Id 5,6 are part of a team with team_id = 9.
+
 select * from team_size;
 
 #1:- Window Functions (Most Simpler Soln)
