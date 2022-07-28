@@ -1,3 +1,4 @@
+use world;
 #Most Asked SQL JOIN based Interview Question | # of Records after 4 types of JOINs
 #CREATE TABLE t7(id int );
 #CREATE TABLE t8(id int );

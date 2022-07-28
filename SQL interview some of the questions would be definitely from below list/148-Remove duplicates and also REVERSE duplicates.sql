@@ -15,5 +15,6 @@ use it ;
 
 select R.colA, f.colB
 from it.Remove_reverse as R
-join Remove_reverse  as f on R.colA = f.colA and R.colB > f.colB
+join Remove_reverse  as f on R.colA = f.colA and R.colB < f.colB
+
 
