@@ -10,9 +10,10 @@ insert into Remove_reverse values('Bob', 'Joe');
 insert into Remove_reverse values('Joe', 'Bob');
 insert into Remove_reverse values('Joe', 'Joe');
 
-SELECT * FROM Remove_reverse;
+SELECT * FROM it.Remove_reverse;
+use it ;
 
 select R.colA, f.colB
-from Remove_reverse as R
-join Remove_reverse  as f on R.colA = f.colA and R.colB < f.colB
+from it.Remove_reverse as R
+join Remove_reverse  as f on R.colA = f.colA and R.colB > f.colB
 
