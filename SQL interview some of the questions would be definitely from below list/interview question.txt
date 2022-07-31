@@ -13,6 +13,29 @@ https://www.youtube.com/playlist?list=PLBTZqjSKn0IeKBQDjLmzisazhqQy4iGkb
 11.  Sort a table based on gender. E.g. if gender is Male then sort in ascending order, if Female then descending order
 
 
+𝘄
+frequently asked question - big data interview
+🟢Define Big Data and explain the Vs of Big Data?
+🟢How to deploy a Big Data Model, what are key steps involved?
+🟢What is Hadoop and what are its main components?
+🟢Explain Lambda architecture ?
+🟢What is dimensionality reduction?
+🟢How does MapReduce Works?
+🟢What happens internally when we submit a Spark job using Spark-Submit?
+🟢What is a catalyst optimizer?
+🟢Explain the working of a Zookeeper in a Big data environment?
+🟢How to tune a spark job? 
+🟢When would you prefer to use Hive, and when would you prefer Spark SQL?
+
+
+project related
+🟢Explain your project architecture?
+🟢What optimization techniques have you used in your project?
+🟢What is your role in your project?
+🟢What is the most challenging problem you have solved in your big data project?
+🟢What is the size of data you deal with on daily basis?
+🟢What is the size of your Spark cluster and the configuration of each node?
+🟢How do you deal with outliers?
 
 
 python 

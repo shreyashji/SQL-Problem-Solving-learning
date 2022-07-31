@@ -13,6 +13,29 @@ https://www.youtube.com/playlist?list=PLBTZqjSKn0IeKBQDjLmzisazhqQy4iGkb
 11.  Sort a table based on gender. E.g. if gender is Male then sort in ascending order, if Female then descending order
 
 
+𝗙𝗿𝗲𝗾𝘂𝗲𝗻𝘁𝗹𝘆 𝗮𝘀𝗸𝗲𝗱 𝗾𝘂𝗲𝘀𝘁𝗶𝗼𝗻𝘀 - 𝗕𝗶𝗴 𝗗𝗮𝘁𝗮 𝗜𝗻𝘁𝗲𝗿𝘃𝗶𝗲𝘄
+
+🟢Define Big Data and explain the Vs of Big Data?
+🟢How to deploy a Big Data Model, what are key steps involved?
+🟢What is Hadoop and what are its main components?
+🟢Explain Lambda architecture ?
+🟢What is dimensionality reduction?
+🟢How does MapReduce Works?
+🟢What happens internally when we submit a Spark job using Spark-Submit?
+🟢What is a catalyst optimizer?
+🟢Explain the working of a Zookeeper in a Big data environment?
+🟢How to tune a spark job? 
+🟢When would you prefer to use Hive, and when would you prefer Spark SQL?
+
+𝗣𝗥𝗢𝗝𝗘𝗖𝗧 𝗥𝗘𝗟𝗔𝗧𝗘𝗗 -
+
+🟢Explain your project architecture?
+🟢What optimization techniques have you used in your project?
+🟢What is your role in your project?
+🟢What is the most challenging problem you have solved in your big data project?
+🟢What is the size of data you deal with on daily basis?
+🟢What is the size of your Spark cluster and the configuration of each node?
+🟢How do you deal with outliers?
 
 
 python 
@@ -209,6 +232,40 @@ print(reverse(s))
 8)Count the occurrences of a given character in a string
 
 9)Compare if two array are equal in size or not
+#A simple solution is to sort both arrays and then linearly compare elements. 
+#Time Complexity: O(n log n) 
+#Auxiliary Space: O(1)
+def areEqual(arr1, arr2, n, m):
+ 
+    # If lengths of array are not
+    # equal means array are not equal
+    if (n != m):
+        return False
+ 
+    # Sort both arrays
+    arr1.sort()
+    arr2.sort()
+ 
+    # Linearly compare elements
+    for i in range(0, n):
+        if (arr1[i] != arr2[i]):
+            return False
+ 
+    # If all elements were same.
+    return True
+ 
+ 
+# Driver Code
+arr1 = [3, 5, 2, 5, 2]
+arr2 = [2, 3, 5, 5, 2]
+n = len(arr1)
+m = len(arr2)
+ 
+if (areEqual(arr1, arr2, n, m)):
+    print("Yes")
+else:
+    print("No")
+
 
 
 10)Remove duplicate elements in a list
