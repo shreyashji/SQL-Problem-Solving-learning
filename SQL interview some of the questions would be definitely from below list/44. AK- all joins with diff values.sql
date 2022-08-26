@@ -14,7 +14,7 @@
 #insert into t6 values (3);
 #insert into t6 values (2);
 #insert into t6 values (2);
-
+use world;
 #delete from t2;
 select * from t5;
 select * from t6;
@@ -44,4 +44,8 @@ SELECT * FROM t3
 LEFT JOIN t4 ON t3.id = t4.id
 UNION 
 SELECT * FROM t3
-right JOIN t4 ON t3.id = t4.id
+right JOIN t4 ON t3.id = t4.id;
+
+#cross join : n*m cartesian product
+select * from t3
+cross join t4 on t3.id = t4.id;

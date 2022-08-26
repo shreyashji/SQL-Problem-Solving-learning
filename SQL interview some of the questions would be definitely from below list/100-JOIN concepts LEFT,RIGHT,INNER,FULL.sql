@@ -32,3 +32,8 @@ UNION
 SELECT x,y FROM one A
 RIGHT JOIN two B
 on A.x = B.y;
+
+#cross join : cartesian product n*m
+SELECT x,y FROM one A
+cross JOIN two B
+on A.x = B.y;
