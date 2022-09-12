@@ -37,7 +37,7 @@ AVG(price) OVER(PARTITION BY company ORDER BY DayNumber
 rows between 2 preceding and current row )as  moving_average
 FROM july.stocks;
 
-#other way
+#other way : unbounded means from the beggining till that point
 SELECT *,
 AVG(price) OVER(PARTITION BY company ORDER BY DayNumber
 rows between unbounded preceding and current row )as  commulative_average
