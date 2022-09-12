@@ -1,6 +1,8 @@
+use world;
 #RANK, DENSE_RANK, ROW_NUMBER
 #jiski slary zyaya usko top rank 
-#RANK===GIVE SAME RANK TO SAME SALARY
+
+#RANK===GIVE SAME RANK TO SAME SALARY,skip numbers in rank after assigning same rnk to same salary,rank over coln
 select emp_id, emp_name ,department_id, salary,
 rank() OVER(order by salary desc) as rnk
 from emp;
@@ -12,6 +14,7 @@ select emp_id, emp_name ,department_id, salary
 ,DENSE_RANK() OVER(order by salary desc) as dens_rnk
 from emp;
 use world;
+
 ## give different trank to same nos
 select emp_id, emp_name ,department_id, salary
 ,RANK() OVER(order by salary desc) as rnk

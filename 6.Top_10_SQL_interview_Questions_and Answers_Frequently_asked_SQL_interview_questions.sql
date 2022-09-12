@@ -18,7 +18,8 @@ INSERT INTO empt values(8,'Ashish',200,5000,2);
 select * from empt;
 
 #Q1-How to find duplicate in a given table ,IF COUNT>1 MEANS THERE ARE DUPLICATE,to put filter on agg cols we use having
-select emp_id ,count(1) from empt group by emp_id having count(1)>1;
+select emp_id ,count(1) from empt
+group by emp_id having count(1)>1;
 
 #Q2-HOW to delete duplicate 
 with cte as (select * , row_number() over(partition by emp_id order by emp_id) as rn from empt)
@@ -28,7 +29,17 @@ delete from cte where rn>1;
 select manager_id from empm
 union 
 select manager_id from empt;
-#Q4-DIFFERENCE between rank,dense_rank,row_number,
+#Q4-DIFFERENCE between rank,dense_rank,row_number
+#RANK===GIVE SAME RANK TO SAME SALARY,skip numbers in rank after assigning same rnk to same salary,rank over coln
+##DENSE RANK== two peple with same slary get same rank,dense rank dont skip number like rank
+#row_number() = give each row unique no
+use world;
+select emp_id, emp_name ,department_id, salary
+,RANK() OVER(order by salary desc) as rnk
+,DENSE_RANK() OVER(order by salary desc) as dens_rnk
+,row_number() OVER(order by salary desc) as rows_number
+from emp;
+
 #Q5-employees who are not present department table,sub queery not good for performance
 select * from  empt where department_id not in (select dep_id from dept) ; # one way
 select empt. *, dept.dep_id,dept.dep_name from empt 
