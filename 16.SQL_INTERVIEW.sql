@@ -1,4 +1,5 @@
 #https://youtu.be/OX6kA3JDO_E
+use world;
 #How to delete duplicates from a table?
 with emp_table as 
 (select *,
@@ -25,6 +26,6 @@ select * from salry_cte where sal_order =2;
 
 # Employee Manager Hierarchy - Self Join
 SELECT e.emp_id,e.emp_name as employeeee,m.emp_name as magr_name
- FROM EMPM e INNER JOIN empm m on  e.manager_id=m.emp_id
+FROM EMPM e INNER JOIN empm m on  e.manager_id=m.emp_id
 
 

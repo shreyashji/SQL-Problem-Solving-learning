@@ -1,5 +1,8 @@
 #How to find employees with salary greater than their manager's salary
+use world;
+
 select * from empm;
+
 select emp_id,emp_name,department_id,salary from empm e
 where salary > (select salary from empm where emp_id = e.manager_id);
 
