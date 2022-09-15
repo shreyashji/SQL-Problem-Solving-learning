@@ -17,7 +17,8 @@ insert into july.employee values(3,2);
 
 SELECT * FROM july.employee;
 SELECT * FROM july.salary;
-#write a sql query to report the comparison result(lower/higher/same) of the average salary of employees in a department to the company average salary
+#write a sql query to report the comparison result(lower/higher/same) of the average salary of employees
+#in a department to the company average salary
 #return the result table in any order
 
 select department_salary.pay_month, department_id,

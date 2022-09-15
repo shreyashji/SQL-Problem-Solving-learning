@@ -35,10 +35,8 @@ SELECT *,LEN(DATEPRESENT)-LEN(REPLACE(DATEPRESENT,',','') )+1
 FROM @ATT  
 
 -------# Question--5 : how to write update query to swap column values
-
 DECLARE @TBL TABLE(ID VARCHAR(100),NAME VARCHAR(100))
 INSERT @TBL VALUES(1,'AA'),(2,'BB'),(3,'CC')
-
 SELECT * FROM @TBL 
 
 UPDATE @TBL
@@ -46,11 +44,10 @@ SET ID=NAME,NAME=ID
 
 SELECT * FROM @TBL
 
-
--------Question--6
-DECLARE @I INT=100
-
-;WITH CTE AS
+#use july;
+#Question--6
+set @I =100;
+WITH recursive CTE AS
 (SELECT 1 AS ID
  UNION ALL
  SELECT ID+1
